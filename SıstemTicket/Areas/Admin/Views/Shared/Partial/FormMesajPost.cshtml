@@ -1,0 +1,21 @@
+﻿@using SıstemTicket.Areas.Admin.Models.Types;
+@if (ViewBag.islemdurum == 1)
+{
+    <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dissmiss="alert" aria-hidden="true">
+            x
+        </button>
+        <h4> <i class="icon fa fa-check">Uyarı</i></h4>
+        @FormMessages.EklemeBasari
+    </div>
+}
+else if (ViewBag.islemDurum == 2)
+{
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dissmiss="alert" aria-hidden="true">
+            x
+        </button>
+        <h4> <i class="icon fa fa-ban">Uyarı</i></h4>
+        @FormMessages.GerekliAlanlar
+    </div>
+}

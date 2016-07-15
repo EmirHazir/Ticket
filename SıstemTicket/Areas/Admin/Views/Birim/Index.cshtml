@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+@model List<SıstemTicket.Areas.Admin.Models.DTO.BirimVM>
+
+<link href="~/Areas/Admin/Content/css/dataTables.bootstrap.css" rel="stylesheet" />
+<script src="~/scripts/dataTables.bootstrap.min.js"></script>
+<script src="~/scripts/jquery.dataTables.min.js"></script>
+
+<section class="content-header">
+
+    <h1>
+        Birimler
+    </h1>
+
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Birim Tablosu</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">   
+            <!-- /.box -->
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Data Table With Full Features</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Birim Adı</th>
+                                <th>Açıklama</th>
+                                <th>İşlem</th>
+                                <th>İşlem</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="a_@item.ID">
+                                    <td>@item.ID</td>
+                                    <td>@item.BirimAdi</td>
+                                    <td>@item.Aciklamasi</td>
+                                    <td><a href="~/Areas/Admin/Views/Birim/Guncelle/@item.ID">Güncelle</a></td>
+                                    <td><img src="~/Areas/Admin/Content/img/sil.png" width="30" height="30" onclick="Sil('/Admin/Birim/BirimSil/',@item.ID)"style="cursor:pointer" /> </td>
+                                </tr>
+                            }
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Birim Adı</th>
+                                <th>Açıklama</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function Sil(id)
+    {
+        $.ajax({
+            url: "/Admin/Birim/BirimSil/" + id,
+            type: "POST",
+            success: function (result) {
+                $("#a_" + id).fadeOut();
+            }
+        })
+    }
+</script>
+
+
+
+
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+
